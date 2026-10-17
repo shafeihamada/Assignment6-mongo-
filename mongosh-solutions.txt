@@ -1,0 +1,67 @@
+// 1. Create an explicit collection named "books" with validation
+db.createCollection("books", {
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         required: [ "title" ],
+         properties: {
+            title: {
+               bsonType: "string",
+               description: "must be a string and is required"
+            }
+         }
+      }
+   }
+})
+
+// 2. Create an implicit collection by inserting data into "authors"
+db.authors.insertOne({
+   "name": "Author1",
+   "nationality": "British"
+})
+
+// 3. Create a capped collection named "logs" with a size limit of 1MB
+db.createCollection("logs", { capped: true, size: 1048576 })
+
+// 4. Create an index on the books collection for the title field
+db.books.createIndex({ title: 1 })
+
+// 5. Insert one document into the books collection
+db.books.insertOne({
+   "title": "Hobbit",
+   "author": "All",
+   "year": 1937,
+   "genres": ["Fantasy", "Adventure"]
+})
+
+// 6. Insert multiple documents into the books collection (at least three)
+db.books.insertMany([
+   { "title": "Future", "author": "George Orwell", "year": 2020, "genres": ["Science Fiction"] },
+   { "title": "To Kill a Mockingbird", "author": "Harper Lee", "year": 1960, "genres": ["Classic", "Fiction"] },
+   { "title": "Brave New World", "author": "Aldous Huxley", "year": 2006, "genres": ["Dystopian", "Science Fiction"] }
+])
+
+// 7. Insert a new log into the logs collection
+db.logs.insertOne({
+   "book_id": ObjectId("64b5c2d8a123456ef8904"),
+   "action": "borrowed"
+})
+
+// 8. Update the book with title "Future" change the year to 2022
+db.books.updateOne(
+   { title: "Future" },
+   { $set: { year: 2022 } }
+)
+
+// 9. Find a Book with title "Brave New World"
+db.books.findOne({ title: "Brave New World" })
+
+// 10. Find all books published between 1990 and 2010
+db.books.find({
+   year: { $gte: 1990, $lte: 2010 }
+})
+
+// 11. Find books where the genre includes "Science Fiction"
+db.books.find({
+   genres: "Science Fiction"
+})

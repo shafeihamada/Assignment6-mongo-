@@ -1,0 +1,145 @@
+
+Assignment 6 (mongoose)
+﻿
+
+POST
+ensure a non empty title
+http://localhost:3000/collection/books
+﻿
+
+Body
+raw (json)
+json
+{"title":"test book"}
+POST
+Implicit collection
+http://localhost:3000/collection/authors
+﻿
+
+Body
+raw (json)
+json
+{"name":"Author1",
+"nationality":"British"}
+POST
+capped collection
+http://localhost:3000/collection/logs/capped
+﻿
+
+POST
+create index
+http://localhost:3000/collection/books/index
+﻿
+
+POST
+Insert one document
+http://localhost:3000/books
+﻿
+
+Body
+raw (json)
+json
+{
+   "title": "Book1",
+   "author": "All",
+   "year": 1937,
+   "genres": ["Fantasy", "Adventure"]
+}
+POST
+Insert multiple document
+http://localhost:3000/books/batch
+﻿
+
+Body
+raw (json)
+View More
+json
+[
+   { "title": "Future", "author": "George Orwell", "year": 1949, "genres": ["Science Fiction"] },
+   { "title": "To Kill a Mockingbird", "author": "Harper Lee", "year": 1960, "genres": ["Classic", "Fiction"] },
+   { "title": "Brave New World", "author": "Aldous Huxley", "year": 1932, "genres": ["Dystopian", "Science Fiction"] }
+]
+POST
+Insert new log
+http://localhost:3000/logs
+﻿
+
+Body
+raw (json)
+json
+{
+   "book_id": "64b5c2d8a123456ef8914abc",
+   "action": "borrowed"
+}
+PATCH
+Update the book
+http://localhost:3000/books/future
+﻿
+
+GET
+GET Abook with title=Brave New World
+http://localhost:3000/books/title?title=Brave New World
+﻿
+
+Query Params
+title
+Brave New World
+GET
+GET all books from=1990&to=2010
+http://localhost:3000/books/year?from=1990&to=2010
+﻿
+
+Query Params
+from
+1990
+to
+2010
+GET
+GET the book genre?genre=Science Fiction
+http://localhost:3000/books/genre?genre=Science Fiction
+﻿
+
+Query Params
+genre
+Science Fiction
+GET
+GET books , skip the first two
+http://localhost:3000/books/search/advanced
+﻿
+
+GET
+GET books when years integer
+http://localhost:3000/books/type/check
+﻿
+
+GET
+GET the book exclude-genres
+http://localhost:3000/books/exclude-genres
+﻿
+
+DELETE
+DELETE books before-year?year=2000
+http://localhost:3000/books/before-year?year=2000
+﻿
+
+Query Params
+year
+2000
+GET
+GET books USING aggregate1
+http://localhost:3000/books/aggregate1
+﻿
+
+GET
+GET books USING aggregate2
+http://localhost:3000/books/aggregate2
+﻿
+
+GET
+GET books USING aggregate3
+http://localhost:3000/books/aggregate3
+﻿
+
+GET
+GET books USING aggregate4
+http://localhost:3000/books/aggregate4
